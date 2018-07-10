@@ -150,6 +150,7 @@ func (core *Core) Write(entry zapcore.Entry, fields []zapcore.Field) error {
 	packet.Level = zapLevelToRavenSeverity[entry.Level]
 	packet.Timestamp = raven.Timestamp(entry.Time)
 	packet.Logger = entry.LoggerName
+	packet.Fingerprint = []string{entry.Message}
 
 	// Process fields.
 	encoder := zapcore.NewMapObjectEncoder()
